@@ -2,7 +2,7 @@ export const CONFIG = {
   proj_name: "dev",
   rm_dev_proj: true,
   early_breaks: true,
-  imdb_path: "./imdb.csv",
+  seen_path: "./seen.txt",
   user_prefs_path: "./user.txt",
   ai: {
     concurrency: 3,

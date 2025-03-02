@@ -1,29 +1,22 @@
 import fs from "node:fs"
-import { parse } from "csv-parse/sync"
 import { CONFIG } from "./config.ts"
 
-const TITLE_COLUMN = "Title"
-const ORIGINAL_TITLE_COLUMN = "Original Title"
+const fileContent = fs.readFileSync(CONFIG.seen_path, "utf-8")
+const seenTitles = fileContent
+  .split("\n")
+  .filter((line) => line.trim().length > 0)
 
-const fileContent = fs.readFileSync(CONFIG.imdb_path, "utf-8")
-const seenMovies: any[] = parse(fileContent, {
-  columns: true,
-  skip_empty_lines: true,
-})
-
-const seenTitles = seenMovies.flatMap((movie) => {
-  const titles = [movie[TITLE_COLUMN]]
-  if (movie[ORIGINAL_TITLE_COLUMN]) {
-    titles.push(movie[ORIGINAL_TITLE_COLUMN])
-  }
-  return titles
-})
+function normalizeTitle(title: string): string {
+  return title.toLowerCase().replace(/[^a-z]/g, "")
+}
 
 export function filter({ movies }: { movies: string[] }): string[] {
-  return movies.filter((movie) => {
-    const normalizedMovie = movie.toLowerCase().replace(/[^a-z]/g, "")
+  const uniqueMovies = [...new Set(movies)]
+
+  return uniqueMovies.filter((movie) => {
+    const normalizedMovie = normalizeTitle(movie)
     return !seenTitles.some((seenTitle) => {
-      const normalizedSeen = seenTitle.toLowerCase().replace(/[^a-z]/g, "")
+      const normalizedSeen = normalizeTitle(seenTitle)
       return normalizedMovie === normalizedSeen
     })
   })
@@ -32,12 +25,12 @@ export function filter({ movies }: { movies: string[] }): string[] {
 if (import.meta.url === `file://${process.argv[1]}`) {
   console.info(seenTitles)
 
-  // Test data
   const testMovies = [
     "The Matrix",
     "Inception",
     "Some New Movie",
     "The Dark Knight",
+    "The Matrix",
   ]
 
   console.log("Testing filter function with movies:", testMovies)

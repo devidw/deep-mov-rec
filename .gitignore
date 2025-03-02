@@ -4,7 +4,9 @@ node_modules
 
 /projects/*
 !/projects/.gitkeep
-/user*.txt
 
+/*.txt
 /*.sh
 /*.csv
+
+/venv
