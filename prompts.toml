@@ -32,6 +32,10 @@ no list symbols or numerations, or quotes
 filter_for_preferences = """
 check the remaining movies in the inut against the user preferences and output a filtered version only keep those that align with the user preferences
 
+don't come up with suggestions outside of the input list yourself
+
+you should only process the inputs
+
 one title per line
 no list symbols or numerations, or quotes
 """

@@ -43,26 +43,50 @@ pnpm i
 pnpm tsx main.ts
 ```
 
-## example output
+## limitations
 
-1. The Invitation [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-2. The Innocents [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-3. Hereditary [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-4. Midsommar [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-5. The Witch [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-6. Creep [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-7. Cure [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-8. The Mothman Prophecies [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-9. The Shining [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-10. Prince of Darkness [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-11. Barbarian [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-12. The Fall of the House of Usher [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-13. The Brood [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-14. The Divide [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
-15. Mysterious Skin [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-16. A Clockwork Orange [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-17. The Joker [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-18. We Need to Talk About Kevin [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-19. Melancholia [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-20. A Scanner Darkly [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
-21. Brazil [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+- not seen check works well most of the times, its code driven and not ai driven since llms are not v good at such tasks, so there are known edge cases like some calling 'Dune: Part One' just 'Dune', in which case there is no match
+- duplicate recommendation could be improved
+- currently just using prompt response instructions, prob better to migrate to actual tool / function calling
+
+## example
+
+### input
+
+- avoid movies that are just at a single location, i prefer 'open world' kinda feel
+- avoid movies that are too shaky, action with tons of cut scenes and fights and gun fire, it can have some, but should be a good balance with actual depth
+- fucked up stuff is a plus, like black mirror, memento, existenz etc, david cronenberg
+- avoid overly romance, sex is a plus but not overly relationship / love driven, heavy
+- shouldn't feel too old, it's okay if it's older, but it shouldn't feel old, taxi driver is old but doesn't feel old, great movie
+- shouldn't be a too femaleish theme like black swan
+- shouldn't be a police or law heavy movie, it can be in there but shouldn't be the main theme
+- no musicals, no documentaries, no black and white, no silent movies
+- i like cyberpunk, scifi, mystery, thriller btw, not limited to but i like those
+
+## output
+
+1. Dune [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+2. The Thing [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+3. Moon [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+4. Pandorum [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+5. 12 Monkeys [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+6. Robocop [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+7. Terminator 2: Judgment Day [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+8. Underwater [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+9. Nope [src](https://wwww.reddit.com/r/MovieSuggestions/comments/10egbfw/sciif_movies_that_arent_sexual/)
+10. The House That Jack Built [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+11. Funny Games [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+12. Dogtooth [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+13. Ichi the Killer [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+14. Event Horizon [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+15. Mother [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+16. Where Evil Lurks [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+17. 8mm [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hla1ge/any_extremely_fucked_up_and_disturbing_movies_to/)
+18. The Cell [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1eod8lm/im_in_the_mood_for_a_movie_that_really_makes_you/)
+19. A Scanner Darkly [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1eod8lm/im_in_the_mood_for_a_movie_that_really_makes_you/)
+20. Brazil [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1eod8lm/im_in_the_mood_for_a_movie_that_really_makes_you/)
+21. The Void [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1eod8lm/im_in_the_mood_for_a_movie_that_really_makes_you/)
+22. A Scanner Darkly [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1eod8lm/im_in_the_mood_for_a_movie_that_really_makes_you/)
+23. Trainspotting [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hl431q/any_good_addiction_movies_of_the_2020s/)
+24. T2 Trainspotting [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hl431q/any_good_addiction_movies_of_the_2020s/)
+25. Uncut Gems [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1hl431q/any_good_addiction_movies_of_the_2020s/)
