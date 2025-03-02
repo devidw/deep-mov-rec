@@ -5,12 +5,12 @@ export const CONFIG = {
   imdb_path: "./imdb.csv",
   user_prefs_path: "./user.txt",
   ai: {
-    concurrency: 2,
+    concurrency: 3,
     rec_check_max: 100,
     rec_check_batch_size: 20,
   },
   reddit: {
-    concurrency: 3,
+    concurrency: 5,
     subreddit: "MovieSuggestions",
     max_search_results_per_query: 1,
     max_comments_per_post: 30,

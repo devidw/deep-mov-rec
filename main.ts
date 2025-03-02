@@ -1,8 +1,6 @@
 import "./env.ts"
 import * as reddit from "./reddit.ts"
 import * as ai from "./ai.ts"
-import { PROMPTS } from "./prompts.ts"
-import * as utils from "./utils.ts"
 import * as seen from "./seen.ts"
 import { Project } from "./project.ts"
 import fs from "node:fs"
@@ -38,15 +36,11 @@ const project = new Project({
 
 project.set_step(1)
 
-const search_queries_raw = await ai.think({
+const search_queries = await ai.build_search_queries({
   project,
-  prompt: PROMPTS["get_search_queries"],
 })
 
-const search_queries = utils.to_array(search_queries_raw)
-
 project.write(search_queries, "search_queries")
-
 project.log("ai", `built ${search_queries.length} search queries`)
 
 ensure_not_empty(search_queries)
@@ -134,18 +128,17 @@ const titles: {
 for (let i = 0; i < reddit_contents.length; i += CONFIG.ai.concurrency) {
   const contents = reddit_contents.slice(i, i + CONFIG.ai.concurrency)
 
-  const titles_raw = await Promise.all(
+  const round_titles = await Promise.all(
     contents.map((content) =>
-      ai.think({
+      ai.extract_titles({
         project,
         input: content.body,
-        prompt: PROMPTS["extract_titles"],
       })
     )
   )
 
-  for (let j = 0; j < titles_raw.length; j++) {
-    const the_titles = utils.to_array(titles_raw[j])
+  for (let j = 0; j < round_titles.length; j++) {
+    const the_titles = round_titles[j]
     project.write(the_titles, `${i + j + 1}_titles`)
     project.log("ai", `[${i + j + 1}] found ${the_titles.length} titles`)
     titles.push(
@@ -196,19 +189,17 @@ for (
 ) {
   const chunk = titles_to_check.slice(i, i + CONFIG.ai.rec_check_batch_size)
 
-  const recs_raw = await ai.think({
+  const round_recs = await ai.filter_for_prefs({
     project,
-    input: utils.to_string(chunk),
-    prompt: PROMPTS["filter_for_preferences"],
+    input: chunk.join("\n"),
   })
 
-  const batch_recs = utils.to_array(recs_raw)
-  recs.push(...batch_recs)
+  recs.push(...round_recs)
 
   project.write(recs, `recs`)
   project.log(
     "ai",
-    `[${i}] got ${batch_recs.length} recs (total: ${recs.length})`
+    `[${i}] got ${round_recs.length} recs (total: ${recs.length})`
   )
 }
 

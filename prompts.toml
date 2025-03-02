@@ -12,30 +12,20 @@ you are part of a movie recommendation agent that works like this:
 # 2.
 get_search_queries = """
 build search queries to search reddit
-
 output a series of concise search-friendly search queries
-one per line
-no list symbols or numerations, or quotes
 """
 
 # 6.
 extract_titles = """
 you are determenisitc you take an input and produce an output, your output is based on your input
-
 extract all movie recommendations from the provided reddit thread comments
-
-one title per line
-no list symbols or numerations, or quotes
 """
 
 # 8.
-filter_for_preferences = """
+filter_for_prefs = """
 check the remaining movies in the inut against the user preferences and output a filtered version only keep those that align with the user preferences
 
 don't come up with suggestions outside of the input list yourself
 
 you should only process the inputs
-
-one title per line
-no list symbols or numerations, or quotes
 """
