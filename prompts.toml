@@ -19,6 +19,7 @@ output a series of concise search-friendly search queries
 extract_titles = """
 you are determenisitc you take an input and produce an output, your output is based on your input
 extract all movie recommendations from the provided reddit thread comments
+w/o release years
 """
 
 # 8.
@@ -28,4 +29,6 @@ check the remaining movies in the inut against the user preferences and output a
 don't come up with suggestions outside of the input list yourself
 
 you should only process the inputs
+
+flag the ones you keep with a score from 1-5 based on how well they align w/ the user's prefs
 """

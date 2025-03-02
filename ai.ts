@@ -153,7 +153,19 @@ export async function filter_for_prefs({
         values: {
           type: "array",
           items: {
-            type: "string",
+            type: "object",
+            properties: {
+              title: {
+                type: "string",
+              },
+              score: {
+                type: "number",
+                // minimum: 1,
+                // maximum: 5,
+              },
+            },
+            required: ["title", "score"],
+            additionalProperties: false,
           },
         },
       },
@@ -163,7 +175,12 @@ export async function filter_for_prefs({
     strict: true,
   }
 
-  const res = await think<{ values: string[] }>({
+  const res = await think<{
+    values: {
+      title: string
+      score: number
+    }[]
+  }>({
     prompt: PROMPTS["filter_for_prefs"],
     project,
     input,
@@ -171,4 +188,14 @@ export async function filter_for_prefs({
   })
 
   return res.values
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const test = await filter_for_prefs({
+    input: `The Matrix
+Inception
+Avatar
+Jurassic Park`,
+  })
+  console.log(test)
 }

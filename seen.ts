@@ -6,7 +6,7 @@ const seenTitles = fileContent
   .split("\n")
   .filter((line) => line.trim().length > 0)
 
-function normalizeTitle(title: string): string {
+export function normalizeTitle(title: string): string {
   return title.toLowerCase().replace(/[^a-z]/g, "")
 }
 

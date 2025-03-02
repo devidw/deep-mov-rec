@@ -180,7 +180,7 @@ ensure_not_empty(unseen_titles)
 project.set_step(6)
 
 const titles_to_check = unseen_titles.slice(0, CONFIG.ai.rec_check_max)
-const recs: string[] = []
+const recs: { title: string; score: number }[] = []
 
 for (
   let i = 0;
@@ -206,16 +206,16 @@ for (
 const recs_with_src = recs
   .map((rec) => {
     const src = titles.find(
-      (t) =>
-        t.title.toLowerCase().replace(/[^a-z]/g, "") ===
-        rec.toLowerCase().replace(/[^a-z]/g, "")
+      (t) => seen.normalizeTitle(t.title) === seen.normalizeTitle(rec.title)
     )
     return {
-      title: rec,
+      title: rec.title,
+      score: rec.score,
       src: src?.src,
     }
   })
   .filter((rec) => rec.src !== undefined)
+  .sort((a, b) => b.score - a.score)
 
 project.write(recs_with_src, `recs_with_src`)
 project.log(
@@ -228,7 +228,7 @@ console.info("\n\nRECS:\n-----")
 const report = recs_with_src
   .map(
     (a, i) =>
-      `${i + 1}. ${a.title}${a.src ? ` [src](https://wwww.reddit.com${a.src})` : ""}`
+      `${i + 1}. [${a.score}/5] ${a.title}${a.src ? ` [src](https://wwww.reddit.com${a.src})` : ""}`
   )
   .join("\n")
 
