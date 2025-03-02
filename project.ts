@@ -29,7 +29,7 @@ export class Project {
 
   write(input: unknown, filename: string) {
     fs.writeFileSync(
-      `${this.dir}/${this.step}_${filename}.json`,
+      `${this.dir}/${this.step}_${filename}${typeof input === "string" ? ".md" : ".json"}`,
       typeof input === "string" ? input : JSON.stringify(input, null, 4)
     )
   }

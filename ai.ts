@@ -1,8 +1,14 @@
 import { Project } from "./project.ts"
 import { PROMPTS } from "./prompts.ts"
 import fs from "node:fs"
+import { CONFIG } from "./config.ts"
+import OpenAI from "openai"
 
-const USER_PREFS = fs.readFileSync("./user.txt").toString()
+const USER_PREFS = fs.readFileSync(CONFIG.user_prefs_path).toString()
+
+const ai = new OpenAI({
+  timeout: 10 * 1000,
+})
 
 export async function think({
   input,
@@ -15,7 +21,7 @@ export async function think({
 }): Promise<string> {
   const params = {
     model: "gpt-4o-mini",
-    temperature: 0,
+    // temperature: 0,
     messages: [
       {
         role: "user",
@@ -41,18 +47,9 @@ export async function think({
   project.write(params, `ai_${id}_req`)
   project.log("ai", "req")
 
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify(params),
-  })
+  const response = await ai.chat.completions.create(params)
 
-  project.log("ai", `${response.status} ${response.statusText}`)
+  project.log("ai", `completed`)
 
-  const json = await response.json()
-
-  return json.choices[0].message.content
+  return response.choices[0].message.content ?? ""
 }

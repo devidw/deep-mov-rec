@@ -1,4 +1,4 @@
-import { config as dotenv } from "dotenv"
+import "./env.ts"
 import * as reddit from "./reddit.ts"
 import * as ai from "./ai.ts"
 import { PROMPTS } from "./prompts.ts"
@@ -26,8 +26,6 @@ function ensure_not_empty(input: unknown[]) {
     process.exit(1)
   }
 }
-
-dotenv({ path: "./.env" })
 
 const project = new Project({
   name: CONFIG.proj_name,
@@ -89,12 +87,16 @@ ensure_not_empty(search_results)
 
 project.set_step(3)
 
-const reddit_contents: string[] = []
+const reddit_contents: {
+  src: string
+  body: string
+}[] = []
 
 for (let i = 0; i < search_results.length; i += CONFIG.reddit.concurrency) {
-  const batch = search_results.slice(i, i + CONFIG.reddit.concurrency)
+  const results = search_results.slice(i, i + CONFIG.reddit.concurrency)
+
   const contents = await Promise.all(
-    batch.map((result) =>
+    results.map((result) =>
       reddit.get_contents({
         project,
         permalink: result.permalink,
@@ -104,7 +106,10 @@ for (let i = 0; i < search_results.length; i += CONFIG.reddit.concurrency) {
 
   for (let j = 0; j < contents.length; j++) {
     project.write(contents[j], `${i + j + 1}_reddit`)
-    reddit_contents.push(contents[j])
+    reddit_contents.push({
+      src: results[j].permalink,
+      body: contents[j],
+    })
   }
 
   if (CONFIG.early_breaks) {
@@ -121,15 +126,19 @@ ensure_not_empty(reddit_contents)
 
 project.set_step(4)
 
-const titles: string[] = []
+const titles: {
+  src: string
+  title: string
+}[] = []
 
 for (let i = 0; i < reddit_contents.length; i += CONFIG.ai.concurrency) {
-  const batch = reddit_contents.slice(i, i + CONFIG.ai.concurrency)
+  const contents = reddit_contents.slice(i, i + CONFIG.ai.concurrency)
+
   const titles_raw = await Promise.all(
-    batch.map((content) =>
+    contents.map((content) =>
       ai.think({
         project,
-        input: content,
+        input: content.body,
         prompt: PROMPTS["extract_titles"],
       })
     )
@@ -139,7 +148,14 @@ for (let i = 0; i < reddit_contents.length; i += CONFIG.ai.concurrency) {
     const the_titles = utils.to_array(titles_raw[j])
     project.write(the_titles, `${i + j + 1}_titles`)
     project.log("ai", `[${i + j + 1}] found ${the_titles.length} titles`)
-    titles.push(...the_titles)
+    titles.push(
+      ...the_titles.map((title) => {
+        return {
+          src: contents[j].src,
+          title,
+        }
+      })
+    )
   }
 
   if (CONFIG.early_breaks) {
@@ -157,7 +173,7 @@ ensure_not_empty(titles)
 
 project.set_step(5)
 
-const unseen_titles = seen.filter({ movies: titles })
+const unseen_titles = seen.filter({ movies: titles.map((a) => a.title) })
 project.write(unseen_titles, `unseen`)
 project.log(null, `${unseen_titles.length} of ${titles.length} are unseen`)
 
@@ -196,5 +212,34 @@ for (
   )
 }
 
+const recs_with_src = recs
+  .map((rec) => {
+    const src = titles.find(
+      (t) =>
+        t.title.toLowerCase().replace(/[^a-z]/g, "") ===
+        rec.toLowerCase().replace(/[^a-z]/g, "")
+    )
+    return {
+      title: rec,
+      src: src?.src,
+    }
+  })
+  .filter((rec) => rec.src !== undefined)
+
+project.write(recs_with_src, `recs_with_src`)
+project.log(
+  null,
+  `Found sources for ${recs_with_src.filter((r) => r.src).length} of ${recs.length} recommendations`
+)
+
 console.info("\n\nRECS:\n-----")
-console.info(utils.to_string(recs))
+
+const report = recs_with_src
+  .map(
+    (a, i) =>
+      `${i + 1}. ${a.title}${a.src ? ` [src](https://wwww.reddit.com${a.src})` : ""}`
+  )
+  .join("\n")
+
+project.write(report, "report")
+console.info(report)

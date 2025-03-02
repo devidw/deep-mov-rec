@@ -1,14 +1,12 @@
 meta = """
 you are part of a movie recommendation agent that works like this:
-1. the user provides their preferences
-2. [ai] builds search queries from them
-3. searches are performed on the /r/movies subreddit
-4. [ai] filters search results to potentially good for recommendation ones
-5. posts are retrieved
-6. [ai] processes the content for recommended titles
-7. extracted titles are checked against a list of movies they user has seen already
-8. [ai] checks remaining recs against the user's preferences
-9. done
+1. user describes movie preferences
+2. preferences are turned into a series of search queries
+3. /r/MovieSuggestions is searched for relevant results
+4. posts with 1st level comments are retrieved
+5. llm extracts movie titles from comments
+6. already seen movies are filtered out, using imdb csv export
+7. remaining movies are checked against user preferences again to ensure quality
 """
 
 # 2.
@@ -18,17 +16,6 @@ build search queries to search reddit
 output a series of concise search-friendly search queries
 one per line
 no list symbols or numerations, or quotes
-"""
-
-# 4.
-filter_search_results = """
-you are determenisitc you take an input and produce an output, your output is based on your input
-
-filter the reddit search results based on relevance given the user preferences
-
-respond in the same json structure as your input, but just with the permalinks
-{permalink: string}[]
-no md code-fences, just raw json
 """
 
 # 6.

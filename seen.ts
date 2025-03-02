@@ -1,16 +1,23 @@
 import fs from "node:fs"
 import { parse } from "csv-parse/sync"
+import { CONFIG } from "./config.ts"
 
-const SEEN_CSV_PATH = "./imdb.csv"
 const TITLE_COLUMN = "Title"
+const ORIGINAL_TITLE_COLUMN = "Original Title"
 
-const fileContent = fs.readFileSync(SEEN_CSV_PATH, "utf-8")
-const seenMovies = parse(fileContent, {
+const fileContent = fs.readFileSync(CONFIG.imdb_path, "utf-8")
+const seenMovies: any[] = parse(fileContent, {
   columns: true,
   skip_empty_lines: true,
 })
 
-const seenTitles = seenMovies.map((movie) => movie[TITLE_COLUMN])
+const seenTitles = seenMovies.flatMap((movie) => {
+  const titles = [movie[TITLE_COLUMN]]
+  if (movie[ORIGINAL_TITLE_COLUMN]) {
+    titles.push(movie[ORIGINAL_TITLE_COLUMN])
+  }
+  return titles
+})
 
 export function filter({ movies }: { movies: string[] }): string[] {
   return movies.filter((movie) => {

@@ -43,60 +43,26 @@ pnpm i
 pnpm tsx main.ts
 ```
 
-<details>
+## example output
 
-<summary>example output</summary>
-
-```
-RECS:
------
-The Thing
-Starship Troopers
-Goodfellas
-The Adventures of Buckaroo Banzai Across the 8th Dimension
-Dazed and Confused
-Midnight Cowboy
-Shaun of the Dead
-Rambo 2
-Terminator 1
-Grosse Point Blank
-Heat
-Dog Day Afternoon
-The Strangers
-Sicario
-Hell or High Water
-The Guest
-True Romance
-Rear Window
-Game Night
-Talented Mr Ripley
-Collateral
-Nobody
-Sisu
-The Outfit
-Emily the Criminal
-The Stranger
-Coherence
-Brawl in Cell Block 99
-The Way of the Gun
-Children of Men
-Se7en
-Pusher
-Victoria
-Birdman
-The Man From Uncle
-Looper
-Don't Breathe
-Nightmare Alley
-The Lookout
-Antitrust
-Swordfish
-Non-Stop
-Boiler Room
-A Color Out of Space
-The Prestige
-Get Out!
-The Babadook
-```
-
-</details>
+1. The Invitation [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+2. The Innocents [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+3. Hereditary [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+4. Midsommar [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+5. The Witch [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+6. Creep [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+7. Cure [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+8. The Mothman Prophecies [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+9. The Shining [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+10. Prince of Darkness [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+11. Barbarian [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+12. The Fall of the House of Usher [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+13. The Brood [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+14. The Divide [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1avnhv6/looking_for_horror_movies_that_have_that_creeping/)
+15. Mysterious Skin [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+16. A Clockwork Orange [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+17. The Joker [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+18. We Need to Talk About Kevin [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+19. Melancholia [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+20. A Scanner Darkly [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
+21. Brazil [src](https://wwww.reddit.com/r/MovieSuggestions/comments/1ad6z6h/i_am_looking_for_very_very_dark_and_sad_films/)
