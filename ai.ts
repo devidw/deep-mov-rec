@@ -15,27 +15,31 @@ async function think<T>({
   prompt,
   project,
   schema,
+  no_prefs,
 }: {
   input?: string
   prompt: string
   project?: Project
   schema?: any
+  no_prefs?: boolean
 }): Promise<T> {
   const params: OpenAI.ChatCompletionCreateParamsNonStreaming = {
     model: "gpt-4o-mini",
     // temperature: 0,
-    messages: [
-      {
-        role: "user",
-        content: `USER PREFERENCES:\n\n${USER_PREFS}`,
-      },
-    ],
+    messages: [],
     response_format: schema
       ? {
           type: "json_schema",
           json_schema: schema,
         }
       : undefined,
+  }
+
+  if (!no_prefs) {
+    params.messages.push({
+      role: "user",
+      content: `USER PREFERENCES:\n\n${USER_PREFS}`,
+    })
   }
 
   if (input) {
@@ -103,9 +107,11 @@ export async function build_search_queries({ project }: { project?: Project }) {
 export async function extract_titles({
   project,
   input,
+  no_prefs,
 }: {
   input: string
   project?: Project
+  no_prefs?: boolean
 }) {
   const schema = {
     name: "movie_titles",
@@ -130,6 +136,7 @@ export async function extract_titles({
     project,
     input,
     schema,
+    no_prefs,
   })
 
   return res.values

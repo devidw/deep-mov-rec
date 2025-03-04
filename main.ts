@@ -7,8 +7,8 @@ import fs from "node:fs"
 import { CONFIG } from "./config.ts"
 import _ from "lodash"
 
-if (CONFIG.rm_dev_proj) {
-  fs.rmSync("./projects/dev", {
+if (CONFIG.rm_proj) {
+  fs.rmSync(`${CONFIG.proj_dir}/${CONFIG.proj_name}`, {
     recursive: true,
     force: true,
   })

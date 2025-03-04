@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import { CONFIG } from "./config.ts"
 
 /**
  * this class will manage a project
@@ -14,7 +15,7 @@ export class Project {
 
   constructor({ name }: { name: string }) {
     this.name = name
-    this.dir = `./projects/${name}`
+    this.dir = `./${CONFIG.proj_dir}/${name}`
     if (fs.existsSync(this.dir)) throw new Error("Project exists")
     fs.mkdirSync(this.dir, { recursive: true })
   }

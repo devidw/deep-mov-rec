@@ -18,8 +18,13 @@ output a series of concise search-friendly search queries
 # 6.
 extract_titles = """
 you are determenisitc you take an input and produce an output, your output is based on your input
-extract all movie recommendations from the provided reddit thread comments
-w/o release years
+extract all movie recommendations from the provided input
+
+no release years
+
+don't come up with suggestions outside of the input list yourself
+
+you should only process the inputs
 """
 
 # 8.

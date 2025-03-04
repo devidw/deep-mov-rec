@@ -94,6 +94,29 @@ export async function get_contents({
   return allText
 }
 
+export async function get_post_details(permalink: string): Promise<{
+  title: string
+  body: string
+}> {
+  const results = await fetch(`https://oauth.reddit.com${permalink}.json`, {
+    headers: {
+      authorization: `Bearer ${process.env.REDDIT_API_KEY}`,
+      accept: "application/json",
+      "User-Agent": "YourAppName/1.0",
+    },
+  })
+
+  console.info(results.status)
+
+  const out = await results.json()
+  const post = out[0].data.children[0].data
+
+  return {
+    title: post.title,
+    body: post.selftext || "",
+  }
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const testPermalink =
     "/r/MovieSuggestions/comments/1j1blrt/whats_your_comfort_movie_that_is_not_a_meant_to/"
