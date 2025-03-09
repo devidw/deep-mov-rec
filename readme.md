@@ -1,16 +1,12 @@
 # recommend me movies that i have <em><strong>NOT</strong></em> seen
 
-over the last years i got so many good movie recs from llms
+**UPDATE: exclusion lists work reliable with reasoning models. this change in model capabilites make this repo obsolete.**
 
-however, at some point it got extremely difficult to get good recs for movies that i haven't seen yet
-
-i always run into series of responses that only listed movies that i've all seen already or that i'm not into bc of x/y/z
-
-surprise surprise providing a csv with hundreds of already seen movies didn't rlly work well
-
-this project is a custom deep search just for movie recs to address all these shortcomings
-
-recs are exclusively sourced from reddit and they are filtered against already seen movies, all based on custom preferences prompt
+asking llms for movie recs is great \
+just you don't want to get recommended movies you've seen already \
+so you list all the movies you've seen already \
+models struggle to exclude them tho \
+this project tries to solve this with a code-based check
 
 ## how it works
 
