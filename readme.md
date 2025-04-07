@@ -1,6 +1,8 @@
 # recommend me movies that i have <em><strong>NOT</strong></em> seen
 
-**UPDATE: exclusion lists work reliable with reasoning models. this change in model capabilites make this repo obsolete.**
+**04/04/25: oai 6 google deep research totally ignore the exclusion list and recommend tons of excluded titles. i feel like a way to solve this would be some kine of tool that allows them to query a suggestion against an exclusion list with embeddings as part of the reasoning or research process.**
+
+**03/08/25: exclusion lists work reliable with reasoning models. this change in model capabilites make this repo obsolete.**
 
 asking llms for movie recs is great \
 just you don't want to get recommended movies you've seen already \
