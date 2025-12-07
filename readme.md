@@ -1,6 +1,8 @@
 # recommend me movies that i have <em><strong>NOT</strong></em> seen
 
-**04/04/25: oai 6 google deep research totally ignore the exclusion list and recommend tons of excluded titles. i feel like a way to solve this would be some kine of tool that allows them to query a suggestion against an exclusion list with embeddings as part of the reasoning or research process.**
+**12/06/25: i now recommend gemini 3 thinking with an imdb export as recommendation engine**
+
+**04/04/25: oai & google deep research totally ignore the exclusion list and recommend tons of excluded titles. i feel like a way to solve this would be some kine of tool that allows them to query a suggestion against an exclusion list with embeddings as part of the reasoning or research process.**
 
 **03/08/25: exclusion lists work reliable with reasoning models. this change in model capabilites make this repo obsolete.**
 
